@@ -1,0 +1,580 @@
+/* 画像や見出しのwidthは全てレスポンシブを考慮して全体の幅から見て何%かで%指定する。
+imgタグに限ってはwidth100%にしておいて個別でmaxwidth指定する */
+
+/*
+html{
+	font-size: 62.5%; これを全体に指定しておくと
+	本来1em=16pxのところが→1em=10pxになるのでわかりやすい
+	今後pxではなくemでフォントサイズ統一する
+} */
+
+img {
+	/* リセットcssで記述する。後は要素ごとにmax-widthで幅を指定する。 */
+	width: 100%;
+}
+
+.body {
+	/* 共通部分 bodyタグの基盤となるここだけお手本サイトでcss検索して最初に記述する様にする */
+	font-family: 游ゴシック体, YuGothic, "游ゴシック Medium", "Yu Gothic Medium",
+		游ゴシック, "Yu Gothic", sans-serif;
+	font-weight: 500;
+	color: rgb(51, 51, 51);
+}
+
+/* ヘッダー */
+.header__main {
+	position: relative;
+	height: 40vw;
+	width: 100%;
+	/* %指定する。vwはview-width（画面幅のこと）  */
+	background: url(../images/header__bg.jpg) no-repeat center center/cover;
+}
+
+.header__main-title {
+	position: relative;
+	top: 9vw;
+	left: 6vw;
+	width: 100%;
+	max-width: 455px;
+}
+
+.header__main-logo {
+	max-width: 100px;
+}
+
+.header__main a {
+	/* 「今なら初月無料」の丸円btn */
+	display: inline-block;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	width: 170px;
+	height: 170px;
+	color: #008dd5;
+	font-size: 27px;
+	font-weight: bold;
+	background: #ffffff;
+	border: #008dd5 5px solid;
+	border-radius: 50%;
+	text-decoration: none;
+}
+.header__main a:hover {
+	color: #ffffff;
+	background: #008dd5;
+	transition: 0.3s;
+}
+
+.header__main-entry {
+	position: relative;
+}
+.main-entry--double {
+	position: absolute;
+	top: 25%;
+	left: 20%;
+	line-height: 41px;
+}
+/* 丸円ロゴのborder-radius上でテキストを2行にする際は円と文字をそれぞれ別でposition:absolute
+①<span>タグと<br>タグで<a>タグ内の文字列2行にして<a>タグにクラス名つける
+②classを付けた<a>タグにposition:relativeをして<span>タグにposition:absolute
+③位置決めたらline-heightで行間を設定 */
+
+.header__main-title--upper,
+.header__main-title--lower {
+	display: block;
+	color: #ffffff;
+	background: #000000;
+	font-size: 41px;
+	font-weight: bold;
+	padding: 5px;
+}
+.header__main-title--upper {
+	max-width: 455px;
+	width: 100%;
+}
+.header__main-title--lower {
+	max-width: 255px;
+	width: 100%;
+	margin-top: 10px;
+}
+
+/* ナビゲーションメニュー */
+
+.nav__menu {
+	display: flex;
+	position: relative;
+	background: #008dd5;
+	font-size: 18px;
+}
+
+.nav__menu-list {
+	display: inline-block;
+	color: #ffffff;
+	text-decoration: none;
+	padding: 30px;
+}
+.nav__menu-list a {
+	color: #fff;
+	text-decoration: none;
+}
+.nav__menu .nav__menu-list:hover {
+	opacity: 0.8;
+}
+
+.nav__menu-list:first-of-type {
+	/* リストの最初の要素にだけプロパティをあてるセレクタ */
+	padding-left: 80px;
+}
+
+.nav__menu-list:last-of-type {
+	/* 最後の要素にだけプロパティをあてるセレクタ */
+	position: absolute;
+	right: 0;
+	background: #a9d92f;
+	padding: 30px;
+}
+.nav__menu-list:last-of-type:hover {
+	/* 最後の要素にだけプロパティ()マウスオーバーをあてるセレクタ */
+	opacity: 1;
+	background: #d4ec97;
+}
+.nav__menu-list .nav__menu-list:not(:last-child) {
+	/* 最後の要素以外の4つにだけプロパティをあてるセレクタ */
+	padding: 30px 20px;
+}
+
+/* イントロダクションから問い合わせまでの共通タイトル設定
+before と after で左上と右下にマークの設定 */
+.intro__upper,
+.main__merit-upper,
+.main__service-upper,
+.main__message-upper,
+.main__inquiry-upper {
+	text-align: center;
+}
+
+.intro__upper-title,
+.main__merit-upper-title,
+.main__service-upper-title,
+.main__message-upper-title,
+.main__inquiry-upper-title {
+	display: inline-block;
+	position: relative;
+	color: #333333;
+	font-size: 36px;
+	padding: 15px;
+	margin: 100px 0 60px;
+}
+
+.intro__upper-title::before,
+.main__merit-upper-title::before,
+.main__service-upper-title::before,
+.main__message-upper-title::before,
+.main__inquiry-upper-title::before {
+	/* 左上の青三角 */
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-bottom: 15px solid transparent;
+	border-left: 15px solid #008dd5; /* ラベルの色はここで変更 */
+	z-index: 100;
+}
+.intro__upper-title::after,
+.main__merit-upper-title::after,
+.main__service-upper-title::after,
+.main__message-upper-title::after,
+.main__inquiry-upper-title::after {
+	/* 右下の青三角 */
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border-top: 15px solid transparent;
+	border-right: 15px solid #008dd5; /* ラベルの色はここで変更 */
+	z-index: 100;
+}
+
+/* イントロダクション */
+.intro__inner {
+	font-size: 18px;
+}
+
+.intro__inner {
+	max-width: 640px;
+	width: 100%;
+	line-height: 32px;
+	margin: 0 auto;
+}
+
+.intro__lower a {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	color: #000000;
+	text-decoration: none;
+	font-weight: normal;
+	width: 100%;
+	margin-top: 30px;
+}
+.intro__lower a:hover {
+	text-decoration: underline;
+}
+
+.intro__lower a:first-of-type {
+	margin-top: 0;
+}
+
+.intro__lower-left {
+	width: calc(80 / 640 * 100%);
+	/* width:calc(希望のサイズ/全体のサイズ*100%)で横幅%計算する */
+}
+
+.intro__lower-right {
+	width: calc(470 / 640 * 100%);
+}
+
+.intro__prev {
+	text-align: center;
+	letter-spacing: 1px;
+	margin: 60px 0 100px;
+}
+
+.intro__prev-text a {
+	color: #008dd5;
+	font-weight: bold;
+	text-decoration: none;
+}
+.intro__prev-text a:hover {
+	text-decoration: underline;
+}
+
+/* ここからメインコンテンツ */
+.main__service-inner,
+.main__message-inner,
+.main__message-upper,
+.main__service-upper {
+	background: #e6f6ff;
+}
+
+.main__service-inner--white,
+.main__merit-inner,
+.main__message-inner--white,
+.main__inquiry-inner {
+	max-width: 1000px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.main__service-inner--white,
+.main__message-inner--white {
+	background: #ffffff;
+}
+
+/* サービスの特長 */
+.main__service-inner {
+	color: #333333;
+	font-size: 18px;
+	line-height: 32px;
+	font-family: æ¸¸ã‚´ã‚·ãƒƒã‚¯ä½“, YuGothic, "æ¸¸ã‚´ã‚·ãƒƒã‚¯ Medium",
+		"Yu Gothic Medium", æ¸¸ã‚´ã‚·ãƒƒã‚¯, "Yu Gothic", sans-serif;
+	padding-bottom: 100px;
+}
+
+.main__service-inner--box {
+	display: flex;
+	padding-top: 60px;
+}
+
+.main__service-left {
+	max-width: 460px;
+	width: 100%;
+	padding: 0 60px;
+}
+
+.main__service-right {
+	position: relative;
+}
+
+/* ここより下記がロゴ6個の並び順指定 */
+.main__service-right img {
+	width: 80px;
+}
+
+.main__service-right img:nth-of-type(1) {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.main__service-right img:nth-of-type(2) {
+	position: absolute;
+	top: 0;
+	left: 120px;
+}
+.main__service-right img:nth-of-type(3) {
+	position: absolute;
+	top: 0;
+	left: 240px;
+}
+.main__service-right img:nth-of-type(4) {
+	position: absolute;
+	top: 50%;
+	left: 40px;
+}
+.main__service-right img:nth-of-type(5) {
+	position: absolute;
+	top: 50%;
+	left: 160px;
+}
+.main__service-right img:nth-of-type(6) {
+	position: absolute;
+	top: 50%;
+	left: 280px;
+}
+
+.main__service-lower-text {
+	text-align: center;
+}
+
+.main__service-lower-text a {
+	position: relative;
+	display: inline-block;
+	color: #008dd5;
+	font-weight: bold;
+	background: #ffffff;
+	border: #008dd5 1px solid;
+	border-radius: 5px;
+	padding: 10px 40px;
+	margin: 30px 0 60px;
+	text-decoration: none;
+}
+.main__service-lower-text a:hover {
+	color: #ffffff;
+	background: #008dd5;
+	transition: 0.3s;
+}
+.main__service-lower-text a::after {
+	content: "";
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	border-top: 10px solid transparent;
+	border-right: 10px solid #008dd5; /* ラベルの色はここで変更 */
+	z-index: 100;
+}
+.main__service-lower-text a:hover::after {
+	/* 疑似要素にマウスオーバーつけるときは <a:hover::after>の順になる */
+	border-top: 10px solid transparent;
+	border-right: 10px solid #ffffff; /* ラベルの色はここで変更 */
+	transition: 0.3s;
+}
+
+/* 3つの強み */
+.main__merit-inner {
+	font-size: 18px;
+	line-height: 36px;
+}
+
+.main__merit-contents-icon {
+	width: calc(300 / 1000 * 100%);
+	margin-right: 40px;
+}
+
+.main__merit-inner--box {
+	width: calc(660 / 1000 * 100%);
+}
+
+.main__merit-contents-upper-title {
+	color: #333333;
+	font-size: 27px;
+	border-bottom: #008dd5 2px solid;
+	margin-bottom: 20px;
+}
+
+.main__merit-contents {
+	display: flex;
+	align-items: center;
+}
+
+.main__merit-contents + .main__merit-contents {
+	margin-top: 40px;
+}
+
+.main__merit-contents-icon img {
+	border-radius: 50%;
+	height: 300px;
+	width: 300px;
+	margin-right: 40px;
+}
+
+.main__merit-contents:last-of-type {
+	margin-bottom: 90px;
+}
+
+/* お客様の声 */
+.main__message-inner--box {
+	padding: 60px;
+	overflow: hidden;
+	/* floatして消えた高さをこの記述で表示できる */
+}
+
+.main__message-inner {
+	line-height: 32px;
+	padding-bottom: 100px;
+}
+
+.main__message-contens-upper-title {
+	color: #ffffff;
+	background: #008dd5;
+	font-size: 18px;
+	font-weight: normal;
+	padding: 20px;
+}
+
+.main__message-contents {
+	width: calc(400 / 880 * 100%);
+	/* calcで横幅計算する */
+}
+.main__message-contents:nth-of-type(1) {
+	/* 大河内様 */
+	float: left;
+}
+.main__message-contents:nth-of-type(2) {
+	/* 篝様  */
+	float: right;
+}
+.main__message-contents:nth-of-type(3) {
+	/* Mike様 */
+	float: right;
+	margin-top: 80px;
+}
+.main__message-contents:nth-of-type(4) {
+	/* 中島様 */
+	float: left;
+	margin-top: 80px;
+}
+
+.main__message-contents-icon img {
+	display: block;
+	border: #dddddd 1px solid;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.main__message-contents-lower-text {
+	color: #333333;
+	font-size: 18px;
+	padding: 25px;
+	border: #dddddd 1px solid;
+	border-radius: 5px;
+}
+
+/* お問い合わせ */
+.main__inquiry-form {
+	text-align: center;
+}
+
+.main__inquiry-form-label-name,
+.main__inquiry-form-label-address,
+.main__inquiry-form-label-type,
+.main__inquiry-form-label-contact {
+	display: block;
+	color: #333333;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+input {
+	max-width: 600px;
+	width: 100%;
+	height: 40px;
+	border: #333333 1px solid;
+	border-radius: 3px;
+	/* formの外枠の修飾 */
+}
+
+textarea {
+	width: 100%;
+	max-width: 600px;
+	height: 200px;
+	border: #333333 1px solid;
+	border-radius: 3px;
+	/* formの外枠の修飾 */
+}
+
+select {
+	width: 20%;
+	height: 30px;
+}
+
+button {
+	/* 送信btn */
+	position: relative;
+	display: inline-block;
+	color: #333333;
+	font-size: 18px;
+	font-weight: bold;
+	background: #ffffff;
+	border: #333333 1px solid;
+	border-radius: 5px;
+	padding: 20px 120px;
+	margin: 30px 0 100px;
+	text-decoration: none;
+}
+button:hover {
+	color: #ffffff;
+	background: #333333;
+	transition: 0.3s;
+}
+button::after {
+	content: "";
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	border-top: 10px solid transparent;
+	border-right: 10px solid#333333; /* ラベルの色はここで変更 */
+	z-index: 100;
+}
+button:hover::after {
+	/* 疑似要素にマウスオーバーつけるときは <a:hover::after>の順になる */
+	border-top: 10px solid transparent;
+	border-right: 10px solid #ffffff; /* ラベルの色はここで変更 */
+	transition: 0.3s;
+}
+
+/* フッター */
+.footer__inner {
+	background: #008dd5;
+	display: flex;
+	justify-content: center;
+	color: #fff;
+	font-size: 16px;
+	/* 統一で1.6em */
+	padding-bottom: 40px;
+}
+
+.footer__contents:not(:last-child) {
+	/* 最後の要素以外に余白つける疑似要素 */
+	padding-right: 80px;
+}
+
+.footer__contents-upper-title {
+	font-weight: normal;
+	padding: 40px 0;
+}
+
+.footer__contents-lower-menu-list {
+	list-style: none;
+}
+.footer__contents-lower-menu-list + .footer__contents-lower-menu-list {
+	/* 隣接セレクタ */
+	padding-top: 15px;
+}
+
+.footer__contents-lower-menu-list a {
+	display: block;
+	color: #fff;
+	text-decoration: none;
+}
+.footer__contents-lower-menu-list a:hover {
+	text-decoration: underline;
+}
